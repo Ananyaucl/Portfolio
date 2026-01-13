@@ -1,15 +1,36 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import display_art_img from '../assets/artworks/Art_1.jpg'
-import { ABOUT, TAG_LINE, ART_1 } from '../data/data.js';
-import pdf from "../assets/resume/Resume_Ananya.pdf"
+import Apple_acrylic from '../assets/artworks/Apple_acrylic.jpeg';
+import Art_1 from '../assets/artworks/Art_1.jpg';
+import Dolphin_airpod from '../assets/artworks/Dolphin_airpod.jpeg';
+import Ganesha from '../assets/artworks/Ganesha.jpeg';
+import Wave_seagull_phone_case from '../assets/artworks/Wave_seagull_phone_case.jpeg';
+import black_hole_airpod from '../assets/artworks/black-hole_airpod.jpeg';
+import galaxy_1_airpod from '../assets/artworks/galaxy-1_airpod.jpeg';
+import galaxy_2_airpod from '../assets/artworks/galaxy-2_airpod.jpeg';
+import landscape_1 from '../assets/artworks/landscape-1.jpeg';
+// import landscape_2 from '../assets/artworks/landscape-2.jpeg';
+import landscape_3 from '../assets/artworks/landscape-3.jpeg';
+import sky_airpod from '../assets/artworks/sky_airpod.jpeg';
+import waterfall from '../assets/artworks/waterfall.jpeg';
+import { ABOUT, TAG_LINE } from '../data/data.js';
+// import pdf from "../assets/resume/Resume_Ananya.pdf"
 import { pdfjs } from "react-pdf";
-import { CgFileDocument } from "react-icons/cg";
 
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 pdfjs.GlobalWorkerOptions.workerSrc = "Portfolio/public/pdf.worker.min.js";
 
 const Home = () => {
+  const images = [Apple_acrylic, Art_1, Dolphin_airpod, Ganesha, Wave_seagull_phone_case, black_hole_airpod, galaxy_1_airpod, galaxy_2_airpod, landscape_1, landscape_3, sky_airpod, waterfall];
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [images.length]);
+
   return (
     <div>
       <section id="home">
@@ -55,7 +76,7 @@ const Home = () => {
                     </div>
                   ))}</div>
 
-                  <div className="mt-5 mb-5">
+                  {/* <div className="mt-5 mb-5">
 
                     <motion.button
                       className="bg-primaryColor  text-secondaryColor px-4 py-2 rounded shadow-md"
@@ -76,23 +97,23 @@ const Home = () => {
                     </motion.button>
 
 
-                  </div>
+                  </div> */}
                 </motion.div></div>
 
               <motion.div
-                className="w-full bg-primaryColor p-2 md:w-5/12 flex flex-col mb-5"
+                className="artImage w-full bg-primaryColor p-2 md:w-5/12 flex flex-col mb-5"
                 initial={{ opacity: 0, x: 50 }} // Slide in from right
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5 }}
               >
                 <img
-                  src={display_art_img}
+                  src={images[currentImageIndex]}
                   alt="home pic"
                   className="max-h-96 float-right"
                 />
-                <div className="text-center text-paragraphText mt-4">
+                {/* <div className="text-center text-paragraphText mt-4">
                   {ART_1}
-                </div>
+                </div> */}
               </motion.div>
             </div>
             {/* <div className='about p-8  rounded-lg bg-gradient-to-r from-secondaryColor via-singleLineText to-primaryColorDark border border-neutral-300 justify-between flex flex-row'>
